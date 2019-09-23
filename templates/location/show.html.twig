@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title location.titre %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% if location.filename %}
+                        <img src="{{ vich_uploader_asset(location, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height: auto;">
+                        {% else %}
+                        <img src="{{ '/images/locations/empty.jpg'| imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height: auto;">
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <h1>{{ location.titre }}</h1>
+                    <h2>{{ location.pieces}} pièces - {{ location.surface}} m²</h2>
+                    <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ location.formattedPrix }} €</div>
+                    <a href="#" class="btn btn-primary">Contacter l'agence</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+    
+    <p>{{ location.description | nl2br }}</p>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Caractèristiques du biens</h2>
+            <table class="table table-striped">
+                <tr>
+                    <td>Surface habitable</td>
+                    <td>{{ location.surface }} m²</td>
+                </tr>
+                 <tr>
+                    <td>Pièces</td>
+                    <td>{{ location.pieces }}</td>
+                </tr>
+                 <tr>
+                    <td>Chambres</td>
+                    <td>{{ location.chambres }}</td>
+                </tr>
+                 <tr>
+                    <td>etage</td>
+                    <td>{{ location.etage }}</td>
+                </tr>
+                 <tr>
+                    <td>Chauffage</td>
+                    <td>{{ location.chauffageType }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h2>Spécificités</h2>
+            <ul class="list-group">
+                {% for option in location.options %}
+                <li class="list-group-item">{{ option.nom }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Agence AtypikHouse' %}
+
+{% block body %}
+    <div class="jumbotron txt-center">
+
+        <h1>Agence AtypikHouse</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at arcu massa. Duis blandit massa et velit auctor, nec pulvinar dolor dignissim. Aliquam vel nisi dictum, consequat sapien ut, sodales leo. Donec egestas convallis urna lacinia ultricies.</p>
+    </div>
+
+    <div class="container">
+        <h2>les derniers biens</h2>
+        <div class="row flex">
+            {% for location in locations %}
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">
+                       <a href="{{ path('location.show', {id: location.id, slug: location.slug}) }}">{{ location.titre() }}</a> 
+                    </h5>
+                    <p class="card-text">{{ location.ville }} ({{ location.codepostal }})</p>
+                    <div class="text-primary" style="font-weight: bold;font-size: 2rem;">{{ location.formattedPrix }} €</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
